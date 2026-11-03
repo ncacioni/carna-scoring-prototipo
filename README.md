@@ -4,11 +4,13 @@ Prototipo de prueba de concepto del Trabajo Final de Grado *"Scoring Predictivo 
 
 Estima un puntaje de admisión para cada consulta legal ingresada, explica cada puntaje con SHAP y registra la decisión final del socio. **Apoya el criterio de los socios, no lo reemplaza.**
 
+**Aplicación pública:** https://carna-scoring-prototipo.onrender.com (acceso con contraseña; puede tardar alrededor de un minuto en despertar si estuvo inactiva).
+
 > **Advertencia.** El modelo se entrenó sobre `Carna_Dataset_Simulado.xlsx`, un conjunto de datos **100% simulado**. Ni los puntajes ni las métricas representan probabilidades o desempeño sobre consultas reales del estudio.
 
 ## Stack
 
-Python · pandas · scikit-learn · XGBoost · SHAP · Streamlit · PostgreSQL (Neon/Supabase; SQLite local para desarrollo) · Jupyter
+Python · pandas · scikit-learn · XGBoost · SHAP · Streamlit · PostgreSQL (Neon; SQLite local para desarrollo) · Docker · Render · Jupyter
 
 ## Estructura
 
@@ -71,20 +73,28 @@ Verifican los criterios de aceptación de HU-001 a HU-008 y el acceso por contra
 
 La app **nunca reentrena**: solo carga el artefacto de `model/`. Para regenerarlo, ejecutar `notebooks/02_model_training.ipynb` de principio a fin; escribe el `.joblib`, `domains.json` y `metadata.json` (versión, hiperparámetros, métricas).
 
-## Despliegue (Streamlit Community Cloud + PostgreSQL)
+## Despliegue (Render + PostgreSQL en Neon)
 
-1. Crear una base gratuita en [Neon](https://neon.tech) o [Supabase](https://supabase.com) y copiar su cadena de conexión.
+La versión pública corre en [Render](https://render.com) (plan gratuito) a partir del `Dockerfile` del repositorio, con la base en [Neon](https://neon.tech) (plan gratuito, región AWS us-east-1).
+
+1. Crear una base gratuita en Neon y copiar su cadena de conexión.
 2. Cargar la base desde la máquina local apuntando a esa URL:
    ```bash
-   set DATABASE_URL=postgresql+psycopg2://usuario:clave@host/base?sslmode=require
+   set DATABASE_URL=postgresql://usuario:clave@host/base?sslmode=require
    python -m scripts.load_history --demo-pending 6
    ```
    (Las tablas se crean solas; `sql/schema.sql` documenta el mismo esquema en SQL.)
-3. Subir el repositorio a GitHub, crear la app en [share.streamlit.io](https://share.streamlit.io) apuntando a `app.py`, y en *Settings → Secrets* cargar:
-   ```toml
-   APP_PASSWORD = "..."
-   DATABASE_URL = "postgresql+psycopg2://..."
+3. En Render: **New → Web Service** → conectar este repositorio (lenguaje **Docker**, rama `main`, región Virginia, plan **Free**) y cargar las variables de entorno:
    ```
+   APP_PASSWORD = ...
+   DATABASE_URL = postgresql://...
+   PORT         = 8501
+   ```
+   Health check: `/_stcore/health`. Cada push a `main` redespliega la app.
+
+El plan gratuito suspende el servicio tras 15 minutos sin uso: el primer acceso posterior tarda alrededor de un minuto en reactivarlo.
+
+> Se evaluó primero Streamlit Community Cloud, pero su infraestructura entregaba la interfaz de forma intermitente (pedidos colgados y websocket inestable) aun con la misma versión que funciona sin fallas en local y en Render.
 
 ## Resultados del modelo (conjunto de evaluación, datos simulados)
 
