@@ -1,0 +1,27 @@
+# secretos
+.streamlit/secrets.toml
+.env
+
+# base local de desarrollo
+data/*.db
+
+# python / jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# documentos de trabajo del TFG (no forman parte del repositorio del prototipo)
+*.docx
+~$*
+.pytest_cache/
+
+# copia original del dataset en la raíz (la versionada es data/Carna_Dataset_Simulado.xlsx)
+/Carna_Dataset_Simulado.xlsx
+
+# documentos de trabajo entre agentes (no forman parte del prototipo)
+Documento_Tecnico_Prototipo.md
+INFORME_PROTOTIPO_PARA_TFG.md
+DIRECTIVAS_*.md
+RESPUESTA_*.md

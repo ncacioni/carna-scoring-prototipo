@@ -1,0 +1,59 @@
+# Sistema visual "Carna, Mango & Asoc." — tema claro fijo (ver README / rationale).
+[theme]
+base = "light"
+primaryColor = "#1f3d6e"                 # azul marino institucional (botones, foco, selección)
+backgroundColor = "#f7f6f2"              # papel cálido
+secondaryBackgroundColor = "#eeece5"     # inputs, superficies secundarias
+textColor = "#1c2230"
+linkColor = "#2a78d6"
+borderColor = "#e1ddd2"
+dataframeBorderColor = "#e8e5dc"
+dataframeHeaderBackgroundColor = "#efede6"
+showWidgetBorder = true
+showSidebarBorder = false
+baseRadius = "0.6rem"
+buttonRadius = "0.55rem"
+
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+headingFont = "'Source Serif 4':https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+baseFontSize = 15
+headingFontWeights = [700, 600, 600, 600, 600, 600]
+headingFontSizes = ["2.35rem", "1.6rem", "1.25rem"]
+metricValueFontSize = "2.1rem"
+metricValueFontWeight = 650
+
+# Colores semánticos (alertas, badges, :color[] en markdown)
+blueColor = "#2a78d6"
+redColor = "#e34948"
+greenColor = "#0ca30c"
+yellowColor = "#c98500"
+yellowBackgroundColor = "#fbf1d9"
+yellowTextColor = "#6b4a00"
+blueBackgroundColor = "#e6effb"
+blueTextColor = "#184f95"
+redBackgroundColor = "#fbe7e6"
+redTextColor = "#9e2b2a"
+greenBackgroundColor = "#e3f3e3"
+greenTextColor = "#0b5e0b"
+
+# Paletas de gráficos (Altair/Vega-Lite/Plotly) — mismas del sistema dataviz
+chartCategoricalColors = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"]
+chartSequentialColors = ["#cde2fb", "#b7d3f6", "#9ec5f4", "#86b6ef", "#6da7ec", "#5598e7", "#3987e5", "#2a78d6", "#1c5cab", "#0d366b"]
+chartDivergingColors = ["#8f2a2a", "#b93a3a", "#e34948", "#ee8a89", "#f6c4c3", "#cde2fb", "#86b6ef", "#3987e5", "#256abf", "#184f95"]
+
+[theme.sidebar]
+backgroundColor = "#13294b"
+secondaryBackgroundColor = "#1d3760"
+textColor = "#e8ecf4"
+borderColor = "#2b4673"
+primaryColor = "#c9a86a"                 # acento dorado sobre el marino
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"

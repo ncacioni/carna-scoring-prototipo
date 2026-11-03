@@ -1,0 +1,66 @@
+{
+  "canal_ingreso": [
+    "Formulario web",
+    "Teléfono",
+    "Referido"
+  ],
+  "area_practica": [
+    "Civil",
+    "Laboral",
+    "Consumidor",
+    "Otro"
+  ],
+  "jurisdiccion": [
+    "CABA",
+    "Provincia de Buenos Aires",
+    "Otra"
+  ],
+  "estado_prescripcion": [
+    "Vigente",
+    "Por vencer (menos de 6 meses)",
+    "Vencido",
+    "No aplica"
+  ],
+  "documentacion_aportada": [
+    "Ninguna",
+    "Parcial",
+    "Completa"
+  ],
+  "tipo_reclamo": [
+    "Cobro de deuda",
+    "Incumplimiento contractual",
+    "Responsabilidad profesional",
+    "Daños por accidente de tránsito",
+    "Daños por filtraciones",
+    "Daños por producto defectuoso",
+    "Reclamo de daños y perjuicios",
+    "Débitos no reconocidos",
+    "Reintegro por cobros bancarios indebidos",
+    "Servicio técnico contratado e incumplido",
+    "Servicio no prestado",
+    "Incumplimiento de oferta",
+    "Reintegro contractual de prestación",
+    "Despido sin causa",
+    "Indemnización por despido",
+    "Diferencias salariales",
+    "Diferencias salariales por trabajo no registrado",
+    "Horas extras impagas",
+    "Prestaciones por accidente de trabajo",
+    "Créditos laborales por acoso",
+    "Alquileres impagos (canon individual)",
+    "Sucesión compleja",
+    "Conflicto tributario",
+    "Trámite migratorio",
+    "Consulta penal"
+  ],
+  "motivo_rechazo": [
+    "Documentación insuficiente",
+    "Falta de viabilidad probatoria",
+    "Plazo vencido",
+    "Jurisdicción fuera de cobertura",
+    "Fuera del área de práctica",
+    "Conflicto de intereses",
+    "Derivado a otra especialidad",
+    "Monto no justifica litigio"
+  ]
+}

@@ -1,0 +1,13 @@
+# Versiones fijadas: el modelo serializado (.joblib) debe cargarse con la misma versión de xgboost con la que se entrenó.
+streamlit==1.55.0
+pandas==2.3.0
+numpy>=2.0,<3
+scikit-learn==1.8.0
+xgboost-cpu==3.4.1  # mismo módulo xgboost, sin la dependencia nvidia-nccl (~250 MB menos en Linux)
+shap==0.54.1
+joblib==1.5.3
+altair==6.0.0
+openpyxl==3.1.5
+SQLAlchemy==2.0.48
+psycopg2-binary==2.9.10
+tzdata>=2024.1

@@ -1,0 +1,97 @@
+{
+  "model_version": "xgb_v1_2026-11-03",
+  "model_file": "xgb_admision_v1_2026-11-03.joblib",
+  "trained_on": "2026-11-03",
+  "model_sha256": "d6db1ab6ed817973",
+  "dataset": "Carna_Dataset_Simulado.xlsx (hoja Consultas, 1224 filas, 100% simulado)",
+  "features": [
+    "canal_ingreso",
+    "area_practica",
+    "tipo_reclamo",
+    "jurisdiccion",
+    "estado_prescripcion",
+    "documentacion_aportada",
+    "monto_estimado",
+    "monto_informado"
+  ],
+  "hyperparameters": {
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "enable_categorical": true,
+    "tree_method": "hist",
+    "eval_metric": "logloss",
+    "random_state": 42,
+    "learning_rate": 0.1,
+    "max_depth": 2,
+    "n_estimators": 100
+  },
+  "split": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "stratify": true,
+    "n_train": 979,
+    "n_test": 245
+  },
+  "test_metrics": {
+    "accuracy": 0.7878,
+    "precision": 0.7571,
+    "recall": 0.9371,
+    "f1_score": 0.8375,
+    "roc_auc": 0.8163
+  },
+  "conf_matrix": {
+    "labels": [
+      "Rechazada",
+      "Aceptada"
+    ],
+    "values": [
+      [
+        59,
+        43
+      ],
+      [
+        9,
+        134
+      ]
+    ]
+  },
+  "comparison": {
+    "Trivial (siempre Aceptada)": {
+      "accuracy": 0.584,
+      "precision": 0.584,
+      "recall": 1.0,
+      "f1_score": 0.737,
+      "roc_auc": 0.5
+    },
+    "Regresión logística": {
+      "accuracy": 0.788,
+      "precision": 0.786,
+      "recall": 0.874,
+      "f1_score": 0.828,
+      "roc_auc": 0.82
+    },
+    "XGBoost": {
+      "accuracy": 0.788,
+      "precision": 0.757,
+      "recall": 0.937,
+      "f1_score": 0.838,
+      "roc_auc": 0.816
+    }
+  },
+  "global_importance": {
+    "Nivel de documentación aportada": 0.766700029373169,
+    "Estado del plazo de prescripción": 0.48539999127388,
+    "Jurisdicción": 0.3052000105381012,
+    "Tipo de reclamo": 0.2946999967098236,
+    "Monto estimado del reclamo": 0.09070000052452087,
+    "Área de práctica": 0.06989999860525131,
+    "Canal por el que ingresó la consulta": 0.014499999582767487,
+    "Si se informó un monto estimado": 0.0
+  },
+  "warning": "Métricas obtenidas sobre datos simulados; no representan desempeño sobre casos reales.",
+  "versions": {
+    "xgboost": "3.4.1",
+    "shap": "0.54.1",
+    "scikit-learn": "1.8.0"
+  }
+}
