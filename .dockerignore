@@ -1,0 +1,24 @@
+.git
+.gitignore
+.dockerignore
+.venv
+venv
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# secretos y datos locales: en el hosting llegan como variables de entorno
+.streamlit/secrets.toml
+.env
+.hf_token
+data/*.db
+
+# material que no necesita la app en ejecución
+*.docx
+~$*
+*.md
+!README.md
+notebooks/
+tests/
+/Carna_Dataset_Simulado.xlsx

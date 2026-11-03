@@ -1,6 +1,7 @@
 """Punto de entrada Streamlit: gate de autenticación + navegación."""
 
 import hmac
+import os
 
 import streamlit as st
 
@@ -12,14 +13,23 @@ st.set_page_config(page_title="Scoring de admisión · Carna, Mango & Asoc.", pa
 inject_css()  # antes del login, para que también tome los estilos
 
 
+def get_app_password() -> str | None:
+    """Secreto del hosting (variable de entorno, como lo entrega Hugging Face Spaces) o secrets.toml local."""
+    if os.environ.get("APP_PASSWORD"):
+        return os.environ["APP_PASSWORD"]
+    try:
+        return st.secrets["APP_PASSWORD"]
+    except (KeyError, FileNotFoundError):
+        return None
+
+
 def check_access() -> bool:
     if st.session_state.get("authenticated"):
         return True
 
-    try:
-        expected = st.secrets["APP_PASSWORD"]
-    except (KeyError, FileNotFoundError):
-        st.error("Falta configurar APP_PASSWORD en .streamlit/secrets.toml (o en los Secrets de Streamlit Cloud).")
+    expected = get_app_password()
+    if not expected:
+        st.error("Falta configurar APP_PASSWORD (variable de entorno / secreto del hosting, o .streamlit/secrets.toml).")
         return False
 
     _, center, _ = st.columns([1, 1.1, 1])
