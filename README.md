@@ -16,6 +16,8 @@ Python · pandas · scikit-learn · XGBoost · SHAP · Streamlit · PostgreSQL (
 
 ```
 app.py                     # punto de entrada: contraseña, tema, navegación
+Dockerfile                 # imagen del despliegue (Python 3.12, puerto 8501)
+requirements.txt           # dependencias con versiones fijadas
 views/
   intake.py                # Pantalla 1 — Formulario de intake (HU-001, HU-002)
   result.py                # Pantalla 2 — Puntaje + cascada SHAP + decisión (HU-003, HU-004, HU-006)
@@ -42,7 +44,7 @@ data/Carna_Dataset_Simulado.xlsx
 
 ## Instalación y ejecución local
 
-Requiere Python 3.11 o superior.
+Requiere Python 3.11 a 3.13 (el despliegue usa 3.12; con 3.14 algunas dependencias fijadas no tienen versión precompilada).
 
 ```bash
 python -m venv .venv
@@ -110,4 +112,4 @@ Referencias: clasificador trivial (siempre "Aceptada") exactitud 0,584; regresi�
 
 ## Seguridad
 
-Acceso por contraseña compartida (`st.secrets`, nunca en el código). Los cinco integrantes del estudio comparten el mismo nivel de acceso; no hay usuarios individuales ni auditoría por usuario (limitación documentada en el TFG).
+Acceso por contraseña compartida, guardada como variable de entorno secreta del servicio en Render (en local, en `.streamlit/secrets.toml`, que no se versiona); nunca en el código ni en el repositorio. Los cinco integrantes del estudio comparten el mismo nivel de acceso; no hay usuarios individuales ni auditoría por usuario (limitación documentada en el TFG).

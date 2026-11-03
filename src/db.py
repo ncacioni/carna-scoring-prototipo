@@ -1,6 +1,6 @@
 """Conexión a la base de datos y queries de la app.
 
-DATABASE_URL (st.secrets o variable de entorno) apunta a PostgreSQL (Neon/Supabase).
+DATABASE_URL (variable de entorno o .streamlit/secrets.toml) apunta a PostgreSQL (Neon en el despliegue).
 Si no está definida, se usa un archivo SQLite local en data/carna_local.db para desarrollo.
 Los nombres de tablas y columnas respetan la Estructura de Datos del TFG.
 """
@@ -110,18 +110,18 @@ def _database_url() -> str:
             return st.secrets["DATABASE_URL"]
     except Exception:
         pass
-    # en Streamlit Cloud el disco es efímero: sin DATABASE_URL se perderían los datos en cada reinicio
-    if os.environ.get("REQUIRE_DATABASE_URL") or Path("/mount/src").exists():
-        raise RuntimeError("DATABASE_URL no está configurada en los Secrets de la app.")
+    # en un contenedor el disco es efímero: sin DATABASE_URL se perderían los datos en cada reinicio
+    # (el Dockerfile define REQUIRE_DATABASE_URL para impedir el fallback a SQLite en el despliegue)
+    if os.environ.get("REQUIRE_DATABASE_URL"):
+        raise RuntimeError("DATABASE_URL no está configurada en las variables de entorno del servicio.")
     return f"sqlite:///{SQLITE_PATH}"
 
 
 def create_db_engine(url: str | None = None) -> sa.Engine:
-    # pool_pre_ping: el plan gratuito de Streamlit Cloud / Neon puede cortar conexiones ociosas (§10)
     url = url or _database_url()
     # pool chico y reciclado: Neon free limita conexiones y corta las inactivas
     options = {} if url.startswith("sqlite") else {"pool_size": 2, "max_overflow": 3, "pool_recycle": 280}
-    engine = sa.create_engine(url, pool_pre_ping=True, **options)
+    engine = sa.create_engine(url, pool_pre_ping=True, **options)  # pre_ping: descarta conexiones cortadas
     metadata.create_all(engine)
     ensure_partners(engine)
     return engine
