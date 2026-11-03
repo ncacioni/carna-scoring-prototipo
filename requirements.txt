@@ -1,5 +1,9 @@
 # Versiones fijadas: el modelo serializado (.joblib) debe cargarse con la misma versión de xgboost con la que se entrenó.
 streamlit==1.66.1
+# servidor web de Streamlit >= 1.66: websockets 17+ decodifica cabeceras como latin-1 y, detrás del
+# proxy de Streamlit Community Cloud, el handshake de /_stcore/stream queda colgado (streamlit#16030)
+uvicorn==0.54.0
+websockets==16.0
 pandas==2.3.0
 numpy>=2.0,<3
 scikit-learn==1.8.0
