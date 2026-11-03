@@ -99,15 +99,17 @@ def today_local() -> date:
 
 
 def _database_url() -> str:
+    # la variable de entorno tiene prioridad sobre secrets.toml: permite apuntar pruebas o scripts a otra base
+    # sin riesgo de escribir en la de producción configurada en los secretos
+    url = os.environ.get("DATABASE_URL")
+    if url:
+        return url
     try:
         import streamlit as st
         if "DATABASE_URL" in st.secrets:
             return st.secrets["DATABASE_URL"]
     except Exception:
         pass
-    url = os.environ.get("DATABASE_URL")
-    if url:
-        return url
     # en Streamlit Cloud el disco es efímero: sin DATABASE_URL se perderían los datos en cada reinicio
     if os.environ.get("REQUIRE_DATABASE_URL") or Path("/mount/src").exists():
         raise RuntimeError("DATABASE_URL no está configurada en los Secrets de la app.")
