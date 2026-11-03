@@ -128,34 +128,36 @@ h1, h2, h3 { letter-spacing: -0.01em; }
 
 /* ---------- sidebar colapsado como riel de íconos ----------
    Streamlit lo deja en ancho 0 y lo desplaza fuera de pantalla; acá se lo fija en 68px, solo con íconos,
-   y el logo + botón de expandir (que Streamlit pone en el encabezado) se ubican dentro del riel. */
-[data-testid="stSidebar"][aria-expanded="false"] {
+   y el logo + botón de expandir (que Streamlit pone en el encabezado) se ubican dentro del riel.
+   Streamlit marca el estado colapsado con aria-expanded="false" (<= 1.55) o data-collapsed="true" (>= 1.66). */
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) {
   transform: none !important; width: 68px !important; min-width: 68px !important; max-width: 68px !important;
   visibility: visible !important; overflow: visible !important;
 }
-[data-testid="stSidebar"][aria-expanded="false"] > div,
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarContent"] {
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) > div,
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarContent"] {
   width: 68px !important; overflow: visible !important;
 }
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarHeader"],
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarUserContent"],
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stNavSectionHeader"],
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarNavSeparator"] { display: none !important; }
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarNav"] { padding-top: 6.2rem; }
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarNavItems"] { padding: 0 !important; }
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarNavLinkContainer"] { margin: .2rem 0; }
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarNavLink"] {
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarHeader"],
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarUserContent"],
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stNavSectionHeader"],
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarNavSeparator"],
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarResizeHandle"] { display: none !important; }
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarNav"] { padding-top: 6.2rem; }
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarNavItems"] { padding: 0 !important; }
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarNavLinkContainer"] { margin: .2rem 0; }
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarNavLink"] {
   justify-content: center; width: 46px; height: 42px; margin: 0 auto; padding: 0; position: relative;
 }
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarNavLink"] [data-testid="stIconMaterial"] { font-size: 1.35rem; }
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarNavLink"] [data-testid="stIconMaterial"] { font-size: 1.35rem; }
 /* nombre de la página como globo al pasar el mouse */
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarNavLink"] span[label] {
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarNavLink"] span[label] {
   display: none; position: absolute; left: 56px; top: 50%%; transform: translateY(-50%%); z-index: 1000;
   background: %(navy)s; color: #fff; border: 1px solid %(gold)s; border-radius: 8px;
   padding: .3rem .65rem; white-space: nowrap; box-shadow: 0 8px 20px -10px rgba(0,0,0,.5);
 }
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarNavLink"]:hover span[label] { display: block; }
-[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarNavLink"] span[label] p { color: #fff; font-size: .85rem; }
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarNavLink"]:hover span[label] { display: block; }
+[data-testid="stSidebar"]:is([aria-expanded="false"], [data-collapsed="true"]) [data-testid="stSidebarNavLink"] span[label] p { color: #fff; font-size: .85rem; }
 /* logo y botón de expandir dentro del riel */
 [data-testid="stHeaderLogo"] { position: fixed; top: 1.1rem; left: 17px; z-index: 1000; }
 [data-testid="stExpandSidebarButton"] {

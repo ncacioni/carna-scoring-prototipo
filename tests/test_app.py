@@ -31,7 +31,7 @@ def test_database(tmp_path_factory):
 def new_app(page: str | None = None, authenticated: bool = True):
     from streamlit.testing.v1 import AppTest
 
-    at = AppTest.from_file("app.py", default_timeout=120)
+    at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=120)
     at.secrets["APP_PASSWORD"] = PASSWORD
     if authenticated:
         at.session_state["authenticated"] = True
